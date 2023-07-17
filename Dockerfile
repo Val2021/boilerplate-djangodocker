@@ -22,7 +22,7 @@ WORKDIR /app
 #The port 8000 will be available for external connections to the container.
 #This is the port we will use for Django.
 EXPOSE 8000
-
+EXPOSE 5432
 #RUN executes commands in a shell inside the container to build the image.
 #The result of running the command is stored in the image's file system as a new layer.
 #Grouping commands in a single RUN can reduce the number of image layers and make it more efficient.
@@ -33,6 +33,7 @@ RUN python -m venv /venv && \
   mkdir -p /data/web/static && \
   mkdir -p /data/web/media && \
   chown -R duser:duser /venv && \
+  chmod -R 777 /data && \
   chown -R duser:duser /data/web/static && \
   chown -R duser:duser /data/web/media && \
   chmod -R 755 /data/web/static && \
